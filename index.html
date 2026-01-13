@@ -11,7 +11,19 @@
         !function (e, t, i) { var a, n = e.innerWidth; if (e[i] = (true || n < 768) ? "mobile" : "desktop", "desktop" == e[i]) a = "width=" + 960 + ", user-scalable=no, initial-scale=1.0"; else { var o = 1; w = 420; w != n && (o = n / w), a = "width=" + w + ", user-scalable=no, initial-scale=" + o + ", minimum-scale=" + o + ", maximum-scale=" + o } var l = t.createElement("meta"); l.name = "viewport", l.setAttribute("content", a), t.head.appendChild(l) }(window, document, "DISPLAY");
     </script>
 
+    <meta property="og:title" content="THƯ MỜI CƯỚI Việt Hoàng - Thu Thủy">
+    <meta property="og:type" content="website">
+    <meta property="og:image"
+        content="https://hilo.id.vn/images/pham_linh_hoang_hue.jpg">
+    <meta property="og:description" content="">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="icon"
+        href="https://hilo.id.vn/images/pham_linh_hoang_hue.jpg"
+        sizes="16x16" />
+
     <link rel="stylesheet" href="./asstes/css/index.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script type="text/javascript">
         // Generate external id for pixel tracking
@@ -361,11 +373,11 @@
                             <p class="text-block-css full-width">(Tức Ngày 05 Tháng 12 Năm Ất Tỵ)<br></p>
                         </div>
                     </div>
-                    <div id="w-ym4nqcl4" class="com-button p-absolute is-animation">
+                    <!-- <div id="w-ym4nqcl4" class="com-button p-absolute is-animation">
                         <div class="button-css full-height full-width lazy"><span class="button-loader"></span>
                             <div class="button-text full-width u-select-none">GỬI MỪNG CƯỚI</div>
                         </div>
-                    </div>
+                    </div> -->
                     <div id="w-0c362gdd" class="p-absolute is-animation">
                         <div class="line-css full-width">
                             <div class="line-container"></div>
@@ -381,12 +393,12 @@
                             <p class="text-block-css full-width">THAM DỰ LỄ CƯỚI</p>
                         </div>
                     </div>
-                    <!-- <div id="w-3cwlzn07" class="com-image-block p-absolute is-animation">
+                    <div id="w-3cwlzn07" class="com-image-block p-absolute is-animation">
                         <div class="image-gradient-border"></div>
                         <div class="image-block-css p-relative full-width full-height full-mask-size mask-position">
                             <div class="image-background p-absolute lazy"></div>
                         </div>
-                    </div> -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -622,11 +634,11 @@
                 <div id="w-ed9oblaz" class="com-rectangle p-absolute">
                     <div class="rectangle-css full-mask-size mask-position full-height full-width lazy"></div>
                 </div>
-                <div id="w-l9ath7jh" class="com-text-block p-absolute is-animation">
+                <!-- <div id="w-l9ath7jh" class="com-text-block p-absolute is-animation">
                     <div class="text-block">
                         <h2 class="text-block-css full-width">Gửi Mừng Cưới</h2>
                     </div>
-                </div>
+                </div> -->
                 <div id="w-m1cj4ar2" class="com-image-block p-absolute">
                     <div class="image-gradient-border"></div>
                     <div class="image-block-css p-relative full-width full-height full-mask-size mask-position">
@@ -725,7 +737,7 @@
 
     <script>
         /* ======================================================
-            1) CHẶN SUBMIT CỦA WEBCAKE
+           1) CHẶN SUBMIT MẶC ĐỊNH CỦA WEBCAKE
            ====================================================== */
         document.addEventListener("submit", function (e) {
             if (e.target && e.target.id === "3jnfqzjo") return;
@@ -733,14 +745,16 @@
             e.stopImmediatePropagation();
         }, true);
 
-
         document.addEventListener("DOMContentLoaded", function () {
 
             const form = document.getElementById("3jnfqzjo");
-            const scriptURL = "https://script.google.com/macros/s/AKfycbzdVpxyKJQ8_vpytwHBnfOI20YxqqmlkHX4hhA3ELa1Xwkn6udG7M1uDbLZzyv9ckBxTQ/exec";
+            if (!form) return;
+
+            const scriptURL =
+                "https://script.google.com/macros/s/AKfycbxVLjI1j-CQ2ZYJopP6f5p_-PRa07Oljr4CTFrpev9zjYLl8HzZ3DTE5G7H-4Dd5p4h/exec";
 
             /* ======================================================
-                2) CHẶN CLICK NÚT WEBCAKE → TỰ BẮN SUBMIT
+               2) CHẶN CLICK NÚT WEBCAKE → TỰ SUBMIT
                ====================================================== */
             document.addEventListener("click", function (e) {
                 if (e.target.closest("#w-3trwd0nd")) {
@@ -753,28 +767,51 @@
             }, true);
 
             /* ======================================================
-                3) GỬI FORM LÊN GOOGLE SHEET
+               3) HÀM LOADING & ALERT
+               ====================================================== */
+            function showLoading() {
+                Swal.fire({
+                    title: "⏳ Đang gửi...",
+                    text: "Vui lòng chờ trong giây lát",
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    didOpen: () => Swal.showLoading()
+                });
+            }
+
+            function closeLoading() {
+                if (Swal.isVisible()) Swal.close();
+            }
+
+            /* ======================================================
+               4) GỬI FORM LÊN GOOGLE SHEET
                ====================================================== */
             form.addEventListener("submit", function (e) {
                 e.preventDefault();
 
-                // LẤY DỮ LIỆU THEO ID CHUẨN 100%
-                const data = {
-                    full_name: document.getElementById("wi-w5tc450z")?.value || "",
-                    relation: document.getElementById("wi-oi804lp9")?.value || "",
-                    message: document.getElementById("wi-r1dfl434")?.value || "",
-                    // ❗❗ LẤY SELECT TOÀN TRANG, KHÔNG LẤY THEO FORM
-                    attend: document.querySelector("select[name='select_1']")?.value || "",
-                };
+                const fullName = document.getElementById("wi-w5tc450z")?.value.trim();
+                const relation = document.getElementById("wi-oi804lp9")?.value.trim();
+                const message = document.getElementById("wi-r1dfl434")?.value.trim();
+                const attend = document.querySelector("select[name='select_1']")?.value;
 
-                console.log("📌 DATA GỬI LÊN SHEET:", data);
+                // Validate tối thiểu
+                if (!fullName || !attend) {
+                    Swal.fire(
+                        "⚠️ Thiếu thông tin",
+                        "Vui lòng nhập Tên và chọn Tham dự",
+                        "warning"
+                    );
+                    return;
+                }
 
-                // Tạo FormData
+                // ✅ HIỆN LOADING
+                showLoading();
+
                 const formData = new FormData();
-                formData.append("full_name", data.full_name);
-                formData.append("relation", data.relation);
-                formData.append("message", data.message);
-                formData.append("attend", data.attend);
+                formData.append("full_name", fullName);
+                formData.append("relation", relation || "");
+                formData.append("message", message || "");
+                formData.append("attend", attend);
 
                 fetch(scriptURL, {
                     method: "POST",
@@ -782,14 +819,32 @@
                 })
                     .then(r => r.json())
                     .then(res => {
-                        console.log("📌 RESPONSE GOOGLE:", res);
-                        alert("🎉 Gửi lời chúc thành công!");
-                        form.reset();
+                        closeLoading();
+
+                        if (res.status === "success") {
+                            Swal.fire({
+                                icon: "success",
+                                title: "🎉 Gửi lời chúc thành công!",
+                                timer: 2000,
+                                showConfirmButton: false
+                            });
+                        } else {
+                            Swal.fire(
+                                "❌ Gửi thất bại",
+                                res.message || "Vui lòng thử lại sau",
+                                "error"
+                            );
+                        }
                     })
                     .catch(err => {
-                        console.log();
+                        console.error(err);
+                        closeLoading();
+                        Swal.fire(
+                            "❌ Lỗi kết nối",
+                            "Không gửi được dữ liệu",
+                            "error"
+                        );
                     });
-
             });
 
         });
